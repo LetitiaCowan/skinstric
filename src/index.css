@@ -30,6 +30,7 @@ code {
   z-index: -1;
   border-color: rgba(0, 0, 0, 1);
   transition: all 0.7s ease;
+  opacity: 1;
 }
 
 .diamond-border-left {
@@ -45,6 +46,8 @@ code {
   z-index: -1;
   border-color: rgba(0, 0, 0, 1);
   transition: all 0.7s ease;
+  opacity: 1;
+
 }
 
 /* Make sure the title is centered initially */
@@ -73,4 +76,9 @@ code {
 
 .fade-out .diamond-border {
   border-color: rgba(0, 0, 0, 0.3);
+}
+
+
+.borderFade {
+  border-color: rgba(0, 0, 0, 0.0);
 }
