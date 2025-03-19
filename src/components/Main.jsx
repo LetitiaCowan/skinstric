@@ -125,7 +125,8 @@ const Main = () => {
         >
           TAKE TEST
         </span>
-        <Link to="/testing"
+        <Link
+          to="/testing"
           className={
             isRightHidden
               ? " transition-opacity duration-700 opacity-0"
@@ -148,8 +149,8 @@ const Main = () => {
         </Link>
       </div>
       <p className="absolute bottom-0 left-0 mx-10 my-10">
-        Skinstric developed an A.I. that creates a <br/>highly-personalized routine
-        tailored to <br/> what your skin needs.
+        Skinstric developed an A.I. that creates a <br />
+        highly-personalized routine tailored to <br /> what your skin needs.
       </p>
     </div>
   );
