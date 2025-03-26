@@ -54,7 +54,7 @@ const Main = () => {
   }, []);
 
   return (
-    <div className="min-h-[calc(100vh-64px)] max-w-[100vw] flex items-center justify-between relative">
+    <div className="min-h-[calc(100vh-64px)] max-w-[100vw] flex items-center justify-between relative overflow-hidden">
       <div
         className={`transition-opacity duration-700 ${
           isLeftHidden ? "pointer-events-none" : "opacity-100"
@@ -110,8 +110,6 @@ const Main = () => {
         } flex flex-row items-center gap-[1rem] px-[16px]`}
       >
         {/* Right Section */}
-        {/* {console.log(isRightHidden)} */}
-        {console.log(isLeftHidden)}
 
         <div
           className={`diamond-border-left ${isLeftHidden ? "borderFade" : ""}`}
