@@ -1,17 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Demographics from "../components/Demographics";
 
 const Final = () => {
   const location = useLocation();
   const data = location.state?.data;
-  const percentage = 57; // This can be dynamic based on your data
 
   const [selectedCategory, setSelectedCategory] = useState("race");
+  const [percentage, setPercentage] = useState(0);
+  const [topResult, setTopResult] = useState('');
 
   const race = data?.race;
   const gender = data?.gender;
   const age = data?.age;
+
+  useEffect(() => {
+    setPercentage(60);
+  }, []);
 
   const getSelectedData = () => {
     switch (selectedCategory) {
@@ -43,10 +48,10 @@ const Final = () => {
         <div className="flex items-center justify-center gap-4">
           <div className=" w-[200px] h-96 flex flex-col gap-3 font-bold ">
             <div
-              className={` w-full border h-[90px] flex justify-around flex-col hover:bg-gray-200 border-t-2   transition-all duration-100 ease-out ${
+              className={` w-full  h-[90px] flex justify-around flex-col   border-t-2 border-gray-300  transition-all duration-100 ease-out ${
                 selectedCategory === "race"
-                  ? "bg-black text-white"
-                  : "bg-gray-100"
+                  ? "bg-black text-white hover:bg-black"
+                  : "bg-gray-100 hover:bg-gray-200"
               }`}
               onClick={() => setSelectedCategory("race")}
             >
@@ -54,10 +59,10 @@ const Final = () => {
               <h2>RACE</h2>
             </div>
             <div
-              className={` w-full border h-[90px] flex justify-around flex-col hover:bg-gray-200   transition-all duration-100 ease-out ${
+              className={` w-full  h-[90px] flex justify-around flex-col   border-t-2 border-gray-300 transition-all duration-100 ease-out ${
                 selectedCategory === "age"
-                  ? "bg-black text-white"
-                  : "bg-gray-100"
+                  ? "bg-black text-white hover:bg-black"
+                  : "bg-gray-100 hover:bg-gray-200"
               }`}
               onClick={() => setSelectedCategory("age")}
             >
@@ -65,10 +70,10 @@ const Final = () => {
               <h2>AGE</h2>
             </div>
             <div
-              className={` w-full border h-[90px] flex justify-around flex-col hover:bg-gray-200   transition-all duration-300 ease-out ${
+              className={` w-full  h-[90px] flex justify-around flex-col  border-t-2 border-gray-300 transition-all duration-300 ease-out ${
                 selectedCategory === "gender"
-                  ? "bg-black text-white"
-                  : "bg-gray-100"
+                  ? "bg-black text-white hover:bg-black"
+                  : "bg-gray-100 hover:bg-gray-200 "
               }`}
               onClick={() => setSelectedCategory("gender")}
             >
@@ -76,37 +81,43 @@ const Final = () => {
               <h2>SEX</h2>
             </div>
           </div>
-          <div className="bg-gray-100 w-[650px] h-96 relative flex items-center justify-center">
-            <svg
-              width="150"
-              height="150"
-              viewBox="0 0 150 150"
-              className="absolute"
-            >
-              <circle
-                cx="75"
-                cy="75"
-                r={radius}
-                fill="none"
-                stroke="rgb(229, 231, 235)" /* Tailwind bg-gray-200 */
-                strokeWidth={strokeWidth}
-              />
-              <circle
-                cx="75"
-                cy="75"
-                r={radius}
-                fill="none"
-                stroke="black"
-                strokeWidth={strokeWidth}
-                strokeDasharray={circumference}
-                strokeDashoffset={circumference - progress}
-                strokeLinecap="round"
-                transform="rotate(-90 75 75)" // Start from top
-              />
-            </svg>
+          <div className="bg-gray-100 border-gray-300 border-t-2 w-[650px] h-96 relative flex items-center justify-center">
+            <h1 className="absolute top-1 left-1 font-bold text-2xl">{topResult}</h1>
+                <svg
+                  width="150"
+                  height="150"
+                  viewBox="0 0 150 150"
+                  className="absolute"
+                >
+                  <circle
+                    cx="75"
+                    cy="75"
+                    r={radius}
+                    fill="none"
+                    stroke="rgb(229, 231, 235)" /* Tailwind bg-gray-200 */
+                    strokeWidth={strokeWidth}
+                  />
+                  <circle
+                    cx="75"
+                    cy="75"
+                    r={radius}
+                    fill="none"
+                    stroke="black"
+                    strokeWidth={strokeWidth}
+                    strokeDasharray={circumference}
+                    strokeDashoffset={circumference - progress}
+                    strokeLinecap="round"
+                    transform="rotate(-90 75 75)" // Start from top
+                  />
+                </svg>
+
             <div className="absolute text-4xl font-bold">{percentage}%</div>
           </div>
-          <Demographics data={getSelectedData()} />
+          <Demographics 
+            data={getSelectedData()} 
+            setPercentage={setPercentage}
+            setTopResult={setTopResult}
+          />
         </div>
       </div>
     </div>
