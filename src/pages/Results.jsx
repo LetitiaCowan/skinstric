@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import galleryIcon from "../assets/gallery.png";
 import CameraCapture from "../hooks/cameraCapture";
+import { FaPlay } from "react-icons/fa";
+import { Link, UNSAFE_FetchersContext } from "react-router";
 
 const API_URL =
   "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseTwo";
 
 const Results = () => {
   const [img, setImg] = useState(null);
-  const [showCamera, setShowCamera] = useState(false);
+  const [showBanner, setShowBanner] = useState(false);
+  const [finalisedData, setFinalisedData] = useState({});
 
   const handleUpload = (e) => {
     const file = e.target.files[0];
@@ -18,7 +21,7 @@ const Results = () => {
       setImg(base64Image);
 
       // 1. Save the image to local storage
-      window.localStorage.setItem("galler_img", base64Image);
+      window.localStorage.setItem("gallery_img", base64Image);
 
       // 2. Upload the image to your API
       uploadImageToAPI(base64Image);
@@ -49,6 +52,7 @@ const Results = () => {
 
       const data = await response.json();
       console.log("Image uploaded successfully:", data);
+      setFinalisedData(data);
     } catch (error) {
       console.error("Error uploading image:", error);
     }
@@ -60,11 +64,32 @@ const Results = () => {
       window.localStorage.setItem("uploadedImage_skintric", img);
       // Upload to API
       uploadImageToAPI(img);
+      setShowBanner(true);
     }
+
+    setTimeout(() => {
+      setShowBanner(false);
+    }, 6000);
   }, [img]);
+
+  useEffect(() => {
+    if (Object.keys(finalisedData).length > 0) {
+      console.log(finalisedData);
+    }
+  }, [finalisedData]);
 
   return (
     <div className="min-h-[calc(100vh-64px)] h-[calc(100vh-64px)] font-bold max-w-[100vw] px-8 py-4 relative">
+      <div
+        className={`absolute top-0 left-1/2 rounded-lg -translate-x-1/2 w-[300px] h-[100px] bg-white 
+          shadow-[0_0_25px_rgba(0,0,0,0.3)] transform transition-transform duration-300 
+          ease-in-out z-50 p-4 text-center ${
+            showBanner ? "translate-y-0" : "-translate-y-[500px]"
+          }`}
+      >
+        Thank you for submitting, press process to continue.
+      </div>
+
       <p className="absolute left-6">TO START ANALYSIS</p>
       <div className="flex justify-around items-center h-full">
         <div className="flex items-center justify-center relative">
@@ -75,8 +100,7 @@ const Results = () => {
           <p className="absolute text-sm top-[-50px] font-thin right-[-140px] w-[136px]">
             ALLOW A.I. TO SCAN YOUR FACE
           </p>
-          <CameraCapture setImg={setImg} setShowCamera={setShowCamera} />
-          {console.log(showCamera)}
+          <CameraCapture setImg={setImg} />
         </div>
         <div className="flex items-center justify-center relative">
           <span className="border border-dotted border-[#A0A4AB] w-[250px] rotate-45 h-[250px] absolute "></span>
@@ -95,6 +119,19 @@ const Results = () => {
           <img className="w-[136px] h-[136px]" src={galleryIcon} alt="" />
         </div>
       </div>
+      {Object.keys(finalisedData).length > 0 && (
+        <Link
+          to="/options"
+          state={{ finalisedData }}
+          className="flex items-center gap-6 absolute bottom-12 right-8"
+          aria-label="Submit"
+        >
+          <span className="text-gray-600">Process</span>
+          <div className="w-[44px] h-[44px] border border-black rotate-45 flex items-center justify-center">
+            <FaPlay className="-rotate-45" />
+          </div>
+        </Link>
+      )}
     </div>
   );
 };
