@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import galleryIcon from "../assets/gallery.png";
 import CameraCapture from "../hooks/cameraCapture";
 import { FaPlay } from "react-icons/fa";
-import { Link, UNSAFE_FetchersContext } from "react-router";
+import { Link } from "react-router";
 
 const API_URL =
   "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseTwo";
