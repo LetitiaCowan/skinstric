@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import cameraIcon from "../assets/camera.png";
 
-const CameraCapture = ({ setImg, setShowCamera }) => {
+const CameraCapture = ({ setImg }) => {
   // Accept setImg as a prop
   const videoRef = useRef(null);
   const [capturing, setCapturing] = useState(false);
@@ -41,7 +41,7 @@ const CameraCapture = ({ setImg, setShowCamera }) => {
     // Set the image in the parent component
     setImg(base64String); 
 
-    window.localStorage.setItem("camera_img", base64String);
+    window.localStorage.setItem("camera_img", base64String)
 
     // Stop the camera after capturing
     stopCamera();
@@ -62,15 +62,26 @@ const CameraCapture = ({ setImg, setShowCamera }) => {
           <img className="w-[136px] h-[136px]" src={cameraIcon} alt="camera" />
         </button>
       ) : (
-        <div>
+        <>
+          <button onClick={startCamera} className="cursor-pointer">
+          <img className="w-[136px] h-[136px]" src={cameraIcon} alt="camera" />
+        </button>
+        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
           <video 
             ref={videoRef} 
             autoPlay 
             playsInline
-            className="w-[300px] h-[300px] object-cover transform -scale-x-100"
+            className="w-[600px] h-[600px] object-cover transform -scale-x-100"
           />
-          <button onClick={captureImage}>Take Photo</button>
+          <button 
+            onClick={captureImage}
+            className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 w-full"
+          >
+            Take Photo
+          </button>
         </div>
+        </>
+        
       )}
     </div>
   );
