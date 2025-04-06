@@ -4,7 +4,7 @@ import { FaPlay } from "react-icons/fa";
 import { Link } from "react-router";
 
 const Testing = () => {
-  const [step, setStep] = useState(1); // Track step (1 = Name, 2 = Location)
+  const [step, setStep] = useState(1);
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [message, setMessage] = useState("");
