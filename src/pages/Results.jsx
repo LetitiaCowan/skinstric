@@ -20,10 +20,8 @@ const Results = () => {
       const base64Image = reader.result;
       setImg(base64Image);
 
-      // 1. Save the image to local storage
       window.localStorage.setItem("gallery_img", base64Image);
 
-      // 2. Upload the image to your API
       uploadImageToAPI(base64Image);
     };
 
@@ -32,10 +30,6 @@ const Results = () => {
     }
   };
 
-  // const uploadedImage = window.localStorage.getItem("uploadedImage_skintric")
-
-  // console.log(uploadedImage)
-
   const uploadImageToAPI = async (base64Image) => {
     try {
       const response = await fetch(API_URL, {
@@ -43,7 +37,7 @@ const Results = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ image: base64Image }), // Adjust according to your API's request format
+        body: JSON.stringify({ image: base64Image }),
       });
 
       if (!response.ok) {
@@ -60,9 +54,7 @@ const Results = () => {
 
   useEffect(() => {
     if (img) {
-      // Save to localStorage
       window.localStorage.setItem("uploadedImage_skintric", img);
-      // Upload to API
       uploadImageToAPI(img);
       setShowBanner(true);
     }
@@ -87,7 +79,7 @@ const Results = () => {
             showBanner ? "translate-y-0" : "-translate-y-[500px]"
           }`}
       >
-        Thank you for submitting, press process to continue.
+        Thank you for submitting, press process to continue!
       </div>
 
       <p className="absolute left-6">TO START ANALYSIS</p>

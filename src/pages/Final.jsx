@@ -8,7 +8,9 @@ const Final = () => {
 
   const [selectedCategory, setSelectedCategory] = useState("race");
   const [percentage, setPercentage] = useState(0);
-  const [topResult, setTopResult] = useState('');
+  const [topRace, setTopRace] = useState('');
+  const [topAge, setTopAge] = useState('');
+  const [topGender, setTopGender] = useState('');
 
   const race = data?.race;
   const gender = data?.gender;
@@ -32,10 +34,20 @@ const Final = () => {
   };
 
   // SVG circle properties
-  const radius = 60; // Radius of the circle
-  const strokeWidth = 8;
-  const circumference = 2 * Math.PI * radius; // Full perimeter of the circle
-  const progress = (percentage / 100) * circumference; // Length of the filled stroke
+  const radius = 180; 
+  const strokeWidth = 4; 
+  const circumference = 2 * Math.PI * radius; 
+  const progress = (percentage / 100) * circumference; 
+
+  const renderTopResult = () => {
+    if (selectedCategory === 'race') {
+      return topRace;
+    } else if (selectedCategory === 'age') {
+      return topAge;
+    } else if (selectedCategory === 'gender') {
+      return topGender;
+    }
+  }
 
   return (
     <div className="font-thin min-h-[calc(100vh-64px)] h-[calc(100vh-64px)] max-w-[100vw] px-8 py-4 relative flex justify-center items-center flex-col">
@@ -55,7 +67,7 @@ const Final = () => {
               }`}
               onClick={() => setSelectedCategory("race")}
             >
-              <h2>EAST ASIAN</h2>
+              <h2>{topRace.toUpperCase()}</h2>
               <h2>RACE</h2>
             </div>
             <div
@@ -66,7 +78,7 @@ const Final = () => {
               }`}
               onClick={() => setSelectedCategory("age")}
             >
-              <h2>20-40</h2>
+              <h2>{topAge.toUpperCase()}</h2>
               <h2>AGE</h2>
             </div>
             <div
@@ -77,29 +89,29 @@ const Final = () => {
               }`}
               onClick={() => setSelectedCategory("gender")}
             >
-              <h2>FEMALE</h2>
+              <h2>{topGender.toUpperCase()}</h2>
               <h2>SEX</h2>
             </div>
           </div>
           <div className="bg-gray-100 border-gray-300 border-t-2 w-[650px] h-96 relative flex items-center justify-center">
-            <h1 className="absolute top-1 left-1 font-bold text-2xl">{topResult}</h1>
+            <h1 className="absolute top-2 left-3 font-thin text-2xl">{renderTopResult()}</h1>
                 <svg
-                  width="150"
-                  height="150"
-                  viewBox="0 0 150 150"
-                  className="absolute"
+                  width="400"
+                  height="400"
+                  viewBox="0 0 500 500"
+                  className="absolute right-0"
                 >
                   <circle
-                    cx="75"
-                    cy="75"
+                    cx="250"
+                    cy="250"
                     r={radius}
                     fill="none"
                     stroke="rgb(229, 231, 235)" /* Tailwind bg-gray-200 */
                     strokeWidth={strokeWidth}
                   />
                   <circle
-                    cx="75"
-                    cy="75"
+                    cx="250"
+                    cy="250"
                     r={radius}
                     fill="none"
                     stroke="black"
@@ -107,16 +119,18 @@ const Final = () => {
                     strokeDasharray={circumference}
                     strokeDashoffset={circumference - progress}
                     strokeLinecap="round"
-                    transform="rotate(-90 75 75)" // Start from top
+                    transform="rotate(-90 250 250)" // Start from top
                   />
                 </svg>
 
-            <div className="absolute text-4xl font-bold">{percentage}%</div>
+              <div className="absolute text-4xl font-bold right-[160px] font-thin">{percentage}%</div>
           </div>
           <Demographics 
             data={getSelectedData()} 
             setPercentage={setPercentage}
-            setTopResult={setTopResult}
+            setTopRace={setTopRace}
+            setTopAge={setTopAge}
+            setTopGender={setTopGender}
           />
         </div>
       </div>

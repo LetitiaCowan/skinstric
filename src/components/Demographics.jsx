@@ -1,6 +1,12 @@
-import React, { use, useEffect } from "react";
+import React, { useEffect } from "react";
 
-const Demographics = ({ data, setPercentage, setTopResult }) => {
+const Demographics = ({
+  data,
+  setPercentage,
+  setTopRace,
+  setTopAge,
+  setTopGender,
+}) => {
   const race = data?.race;
   const age = data?.age;
   const gender = data?.gender;
@@ -8,19 +14,35 @@ const Demographics = ({ data, setPercentage, setTopResult }) => {
   useEffect(() => {
     if (race) {
       const highestRace = Object.entries(race).sort((a, b) => b[1] - a[1])[0];
-      setTopResult(highestRace[0]);
+      setTopRace(
+        highestRace[0]
+          .split("_")
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" ")
+      );
     } else if (age) {
       const highestAge = Object.entries(age).sort((a, b) => b[1] - a[1])[0];
-      setTopResult(highestAge[0]);
+      setTopAge(
+        highestAge[0]
+          .split("_")
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" ")
+      );
     } else if (gender) {
-      const highestGender = Object.entries(gender).sort((a, b) => b[1] - a[1])[0];
-      setTopResult(highestGender[0]);
+      const highestGender = Object.entries(gender).sort(
+        (a, b) => b[1] - a[1]
+      )[0];
+      setTopGender(
+        highestGender[0]
+          .split("_")
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" ")
+      );
     }
-  }, [race, age, gender, setTopResult]);
+  }, [race, age, gender, setTopRace, setTopAge, setTopGender]);
 
   useEffect(() => {
     if (race) {
-      // Get the highest percentage race
       const highestRacePercentage = Object.entries(race).sort(
         (a, b) => b[1] - a[1]
       )[0];
@@ -38,8 +60,14 @@ const Demographics = ({ data, setPercentage, setTopResult }) => {
     }
   }, [race, age, gender, setPercentage]);
 
-  const handleItemClick = (value) => {
-    setPercentage(Math.floor(value * 100));
+  const handleActualDemographics = (key) => {
+    if (race) {
+      setTopRace(key);
+    } else if (age) {
+      setTopAge(key);
+    } else if (gender) {
+      setTopGender(key);
+    }
   };
 
   const renderContent = () => {
@@ -57,10 +85,19 @@ const Demographics = ({ data, setPercentage, setTopResult }) => {
                 <li
                   key={key}
                   className="text-gray-700 flex justify-between cursor-pointer hover:bg-gray-200 p-1"
-                  onClick={() => handleItemClick(value)}
+                  onClick={() =>
+                    handleActualDemographics(
+                      key.charAt(0).toUpperCase() + key.slice(1)
+                    )
+                  }
                 >
-                  {key.replace(/_/g, " ")}:{" "}
-                  <span className="font-bold">
+                  {key
+                    .replace(/_/g, " ")
+                    .split(" ")
+                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                    .join(" ")}
+                  :{" "}
+                  <span className="font-thin">
                     {Math.floor((value * 100).toFixed(2))}%
                   </span>
                 </li>
@@ -81,9 +118,18 @@ const Demographics = ({ data, setPercentage, setTopResult }) => {
             {Object.entries(age)
               .sort((a, b) => b[1] - a[1])
               .map(([key, value]) => (
-                <li key={key} className="text-gray-700 flex justify-between">
-                  {key.replace(/_/g, " ")}:{" "}
-                  <span className="font-bold">
+                <li
+                  key={key}
+                  className="text-gray-700 flex justify-between hover:bg-gray-200 p-1"
+                  onClick={() => handleActualDemographics(key)}
+                >
+                  {key
+                    .replace(/_/g, " ")
+                    .split(" ")
+                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                    .join(" ")}
+                  :{" "}
+                  <span className="font-thin">
                     {" "}
                     {Math.floor((value * 100).toFixed(2))}%
                   </span>
@@ -105,9 +151,22 @@ const Demographics = ({ data, setPercentage, setTopResult }) => {
             {Object.entries(gender)
               .sort((a, b) => b[1] - a[1])
               .map(([key, value]) => (
-                <li key={key} className="text-gray-700 flex justify-between">
-                  {key.replace(/_/g, " ")}:{" "}
-                  <span className="font-bold">
+                <li
+                  key={key}
+                  className="text-gray-700 flex justify-between hover:bg-gray-200 p-1"
+                  onClick={() =>
+                    handleActualDemographics(
+                      key.charAt(0).toUpperCase() + key.slice(1)
+                    )
+                  }
+                >
+                  {key
+                    .replace(/_/g, " ")
+                    .split(" ")
+                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                    .join(" ")}
+                  :{" "}
+                  <span className="font-thin">
                     {" "}
                     {Math.floor((value * 100).toFixed(2))}%
                   </span>
