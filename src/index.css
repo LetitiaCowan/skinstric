@@ -33,6 +33,10 @@ code {
   opacity: 1;
 }
 
+.dotted-diamond {
+  border: 3px dotted black;
+}
+
 .diamond-border-left {
   position: absolute;
   left: -20%;
@@ -53,7 +57,7 @@ code {
     width: 400px;
     height: 400px;
   }
-  
+
   .diamond-border-left {
     width: 400px;
     height: 400px;
@@ -65,7 +69,7 @@ code {
     width: 500px;
     height: 500px;
   }
-  
+
   .diamond-border-left {
     width: 500px;
     height: 500px;
@@ -98,5 +102,22 @@ code {
 }
 
 .borderFade {
-  border-color: rgba(0, 0, 0, 0.0);
+  border-color: rgba(0, 0, 0, 0);
 }
+
+@media (max-width: 768px) {
+  .black {
+    background-color: black;
+  }
+
+  .padding {
+    padding: 100px 0;
+  }
+
+  .smaller {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+

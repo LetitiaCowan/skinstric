@@ -65,7 +65,7 @@ const CameraCapture = ({ setImg }) => {
 
   const renderDiamond = () => {
     return (
-      <div className="w-[8px] h-[8px] rotate-45  border-1 border border-white">
+      <div className="w-[8px] h-[8px] rotate-45 border-1 border border-white">
 
         </div>
     );
@@ -75,7 +75,7 @@ const CameraCapture = ({ setImg }) => {
     <div className="z-20 relative">
       {!capturing ? (
         <button onClick={handleAccessPanel} className="cursor-pointer">
-          <img className="w-[136px] h-[136px]" src={cameraIcon} alt="camera" />
+          <img className="xs:w-[100px] xs:h-[100px] w-[136px] h-[136px]" src={cameraIcon} alt="camera" />
         </button>
       ) : (
         <>

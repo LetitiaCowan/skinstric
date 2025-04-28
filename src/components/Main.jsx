@@ -54,11 +54,11 @@ const Main = () => {
   }, []);
 
   return (
-    <div className="min-h-[calc(100vh-64px)] max-w-[100vw] flex flex-col md:flex-row items-center justify-between relative overflow-hidden px-4 md:px-8">
+    <div className="min-h-[calc(100vh-64px)] max-w-[100vw] flex items-center justify-between flex-col sm:flex-row relative overflow-hidden py-8 sm:py-0">
       <div
         className={`transition-opacity duration-700 ${
           isLeftHidden ? "pointer-events-none" : "opacity-100"
-        } flex flex-row items-center gap-[1rem] px-[16px] order-2 md:order-1`}
+        } flex flex-row items-center gap-[1rem] px-[16px]`}
       >
         {/* Left Section */}
         <button
@@ -69,15 +69,15 @@ const Main = () => {
           }
           onMouseEnter={() => {
             tl.current.play();
-            setIsRightHidden(true);
+            setIsRightHidden(true); // Hide right section
           }}
           onMouseLeave={() => {
             tl.current.reverse();
-            setIsRightHidden(false);
+            setIsRightHidden(false); // Show right section
           }}
         >
           <img
-            className="w-8 h-8 md:w-10 md:h-10 opacityAnimation"
+            className="w-10 h-10 opacityAnimation"
             src={arrowImg}
             alt="arrow"
           />
@@ -86,40 +86,44 @@ const Main = () => {
           className={
             isLeftHidden
               ? " transition-opacity duration-700 opacity-0"
-              : "opacity-100 text-sm md:text-base"
+              : "opacity-100"
           }
         >
           DISCOVER A.I.
         </span>
         <div
-          className={`diamond-border-right hidden md:block ${
+          className={`diamond-border-right sm:block hidden ${
             isRightHidden ? "borderFade" : null
           }`}
         ></div>
       </div>
 
       {/* Title Section */}
-      <div className="text-[40px] md:text-[60px] lg:text-[100px] flex flex-col items-center font-thin text-center order-1 md:order-2 my-8 md:my-0">
+      <div className="sm:text-[100px] text-[40px] flex flex-col items-center font-thin text-center">
         <span ref={titleRef1}>Sophisticated</span>
         <span ref={titleRef2}>skincare</span>
       </div>
 
+      <span className="dotted-diamond w-[300px] h-[300px] rotate-45 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 block sm:hidden"></span>
+
+      {/* Right Section */}
+
       <div
         className={`transition-opacity duration-700 ${
           isRightHidden ? " pointer-events-none" : "opacity-100"
-        } flex flex-row items-center gap-[1rem] px-[16px] order-3`}
+        } flex flex-row items-center gap-[1rem] px-[16px]`}
       >
-        {/* Right Section */}
         <div
-          className={`diamond-border-left hidden md:block ${
+          className={`diamond-border-left sm:block hidden ${
             isLeftHidden ? "borderFade" : ""
           }`}
         ></div>
+
         <span
           className={
             isRightHidden
               ? " transition-opacity duration-700 opacity-0"
-              : "opacity-100 text-sm md:text-base"
+              : "opacity-100"
           }
         >
           TAKE TEST
@@ -133,23 +137,23 @@ const Main = () => {
           }
           onMouseEnter={() => {
             tl2.current.play();
-            setIsLeftHidden(true);
+            setIsLeftHidden(true); // Hide left section
           }}
           onMouseLeave={() => {
             tl2.current.reverse();
-            setIsLeftHidden(false);
+            setIsLeftHidden(false); // Show left section
           }}
         >
           <img
-            className={`w-8 h-8 md:w-10 md:h-10 rotate-180 opacityAnimation`}
+            className={`w-10 h-10 rotate-180 opacityAnimation`}
             src={arrowImg}
             alt="arrow"
           />
         </Link>
       </div>
-      <p className="absolute bottom-0 left-0 mx-4 md:mx-10 my-4 md:my-10 text-sm md:text-base">
-        Skinstric developed an A.I. that creates a <br className="hidden md:block" />
-        highly-personalized routine tailored to <br className="hidden md:block" /> what your skin needs.
+      <p className="absolute bottom-0 left-0 mx-10 sm:my-10 my-[50px] text-[12px]">
+        Skinstric developed an A.I. that creates a <br />
+        highly-personalized routine tailored to <br /> what your skin needs.
       </p>
     </div>
   );
