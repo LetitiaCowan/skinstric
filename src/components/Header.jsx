@@ -11,7 +11,7 @@ const Header = () => {
           <span className="text-lg relative top-[-1px]">]</span>
         </div>
       </div>
-      <button className="rounded bg-black text-white text-[16px] px-4 py-2 rounded mx-[25px]">
+      <button className=" bg-black text-white text-[16px] px-4 py-2 rounded mx-[25px] xs:text-xs">
         ENTER CODE
       </button>
     </div>
