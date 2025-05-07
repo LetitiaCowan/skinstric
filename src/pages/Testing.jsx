@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { FaPlay } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import Loading from "../components/Loading";
 
 const Testing = () => {
@@ -61,11 +61,11 @@ const Testing = () => {
   
   const diamond = () => {
     return (
-      <>
+      <div className="z-[-100]">
         <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-30 rotate-45  w-[250px] sm:w-[300px] h-[250px] sm:h-[300px] dotted-diamond"></span>
         <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20 rotate-45  w-[300px] sm:w-[350px] h-[300px] sm:h-[350px] dotted-diamond"></span>
         <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-10 rotate-45  w-[350px] sm:w-[400px] h-[350px] sm:h-[400px] dotted-diamond"></span>
-      </>
+      </div>
     );
   };
 
