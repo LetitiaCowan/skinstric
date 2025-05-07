@@ -39,13 +39,14 @@ const Results = () => {
   // console.log(uploadedImage)
 
   const uploadImageToAPI = async (base64Image) => {
+    setLoading(true); // Set loading at the start of the upload
     try {
       const response = await fetch(API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ image: base64Image }), // Adjust according to your API's request format
+        body: JSON.stringify({ image: base64Image }),
       });
 
       if (!response.ok) {
@@ -57,6 +58,7 @@ const Results = () => {
       setFinalisedData(data);
     } catch (error) {
       console.error("Error uploading image:", error);
+      setLoading(false); // Clear loading on error
     }
   };
 
@@ -71,21 +73,21 @@ const Results = () => {
 
   useEffect(() => {
     if (Object.keys(finalisedData).length > 0) {
-      setLoading(true);
-
+      // Show banner after 3 seconds
       setTimeout(() => {
         setShowBanner(true);
       }, 3000);
 
+      // Hide banner after 9 seconds
       setTimeout(() => {
         setShowBanner(false);
       }, 9000);
-    }
 
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
- 
+      // Set loading to false after banner is shown
+      setTimeout(() => {
+        setLoading(false);
+      }, 3000);
+    }
   }, [finalisedData]);
 
   return (
