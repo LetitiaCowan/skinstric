@@ -57,6 +57,19 @@ const Testing = () => {
     }
   };
 
+
+  
+  const diamond = () => {
+    return (
+      <>
+        <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-30 rotate-45  w-[250px] sm:w-[300px] h-[250px] sm:h-[300px] dotted-diamond"></span>
+        <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20 rotate-45  w-[300px] sm:w-[350px] h-[300px] sm:h-[350px] dotted-diamond"></span>
+        <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-10 rotate-45  w-[350px] sm:w-[400px] h-[350px] sm:h-[400px] dotted-diamond"></span>
+      </>
+    );
+  };
+
+
   return (
     <div className="min-h-[calc(100vh-64px)] max-w-[100vw] font-bold px-8 py-4 flex justify-center relative">
       <p className="absolute left-6">TO START ANALYSIS</p>
@@ -69,9 +82,10 @@ const Testing = () => {
               <>
                 <p className="text-[10px] text-gray-400">CLICK TO TYPE</p>
 
-                <div className="relative w-full flex justify-center">
+                <div className="relative w-full flex justify-center max-w-[245px] border-b-2">
+                  {diamond()}
                   <input
-                    className="text-3xl text-black font-thin placeholder-black outline-none text-center w-auto min-w-[50px] border-b-2"
+                    className="text-3xl text-black font-thin placeholder-black outline-none text-center w-auto "
                     placeholder="Introduce Yourself"
                     type="text"
                     value={name}
