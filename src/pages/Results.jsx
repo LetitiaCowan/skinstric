@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import galleryIcon from "../assets/gallery.png";
 import CameraCapture from "../hooks/cameraCapture";
 import { FaPlay } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link } from "react-router-dom"; // ✅ Corrected import
 import Loading from "../components/Loading";
 
 const API_URL =
@@ -22,10 +22,10 @@ const Results = () => {
       const base64Image = reader.result;
       setImg(base64Image);
 
-      // 1. Save the image to local storage
+      // Save image to localStorage
       window.localStorage.setItem("gallery_img", base64Image);
 
-      // 2. Upload the image to your API
+      // Upload to API
       uploadImageToAPI(base64Image);
     };
 
@@ -34,12 +34,8 @@ const Results = () => {
     }
   };
 
-  // const uploadedImage = window.localStorage.getItem("uploadedImage_skintric")
-
-  // console.log(uploadedImage)
-
   const uploadImageToAPI = async (base64Image) => {
-    setLoading(true); // Set loading at the start of the upload
+    setLoading(true);
     try {
       const response = await fetch(API_URL, {
         method: "POST",
@@ -48,45 +44,41 @@ const Results = () => {
         },
         body: JSON.stringify({ image: base64Image }),
       });
-
+  
       if (!response.ok) {
         throw new Error("Failed to upload image");
       }
-
+  
       const data = await response.json();
       console.log("Image uploaded successfully:", data);
       setFinalisedData(data);
+  
+      // ✅ Delay the loading state off by 3 seconds
+      setTimeout(() => {
+        setLoading(false);
+      }, 3000);
     } catch (error) {
       console.error("Error uploading image:", error);
-      setLoading(false); // Clear loading on error
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     if (img) {
-      // Save to localStorage   
       window.localStorage.setItem("uploadedImage_skintric", img);
-      // Upload to API
-      uploadImageToAPI(img);
+      // Removed: uploadImageToAPI(img); ✅ Avoid double call
     }
   }, [img]);
 
   useEffect(() => {
     if (Object.keys(finalisedData).length > 0) {
-      // Show banner after 3 seconds
       setTimeout(() => {
         setShowBanner(true);
       }, 3000);
 
-      // Hide banner after 9 seconds
       setTimeout(() => {
         setShowBanner(false);
       }, 9000);
-
-      // Set loading to false after banner is shown
-      setTimeout(() => {
-        setLoading(false);
-      }, 3000);
     }
   }, [finalisedData]);
 
@@ -110,6 +102,7 @@ const Results = () => {
         <>
           <p className="absolute left-6">TO START ANALYSIS</p>
           <div className="flex justify-around items-center sm:flex-row flex-col h-full">
+            {/* Camera Upload */}
             <div className="flex items-center justify-center relative">
               <span className="border border-dotted border-[#A0A4AB]  sm:w-[250px] w-[200px] rotate-45 sm:h-[250px] h-[200px] absolute "></span>
               <span className="border border-dotted border-[#A0A4AB]  sm:w-[300px] w-[250px] rotate-45 sm:h-[300px] h-[250px] absolute opacity-60"></span>
@@ -120,6 +113,8 @@ const Results = () => {
               </p>
               <CameraCapture setImg={setImg} />
             </div>
+
+            {/* Gallery Upload */}
             <div className="flex items-center justify-center relative">
               <span className="border border-dotted border-[#A0A4AB] sm:w-[250px] w-[200px] rotate-45 sm:h-[250px] h-[200px] absolute "></span>
               <span className="border border-dotted border-[#A0A4AB] sm:w-[300px] w-[250px] rotate-45 sm:h-[300px] h-[250px] absolute opacity-60"></span>
@@ -137,6 +132,8 @@ const Results = () => {
               <img className="w-[136px] h-[136px]" src={galleryIcon} alt="" />
             </div>
           </div>
+
+          {/* Process Button */}
           {Object.keys(finalisedData).length > 0 && (
             <Link
               to="/options"
