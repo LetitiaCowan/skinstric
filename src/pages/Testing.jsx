@@ -115,6 +115,8 @@ const Testing = () => {
                 <p className="text-[10px] text-gray-400">CLICK TO TYPE</p>
 
                 <div className="relative w-full flex justify-center">
+                {diamond()}
+
                   <input
                     className="text-3xl text-black font-thin placeholder-black max-w-[245px] border-b-2 outline-none text-center"
                     placeholder="Your Location"
