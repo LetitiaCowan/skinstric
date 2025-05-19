@@ -4,15 +4,14 @@ const DemographicData = ({ data, type, onSelect, setPercentage, selectedItem }) 
   if (!data) return null;
 
   const entries = Object.entries(data).sort((a, b) => b[1] - a[1]);
-  const highestEntry = entries[0];
 
   return (
     <>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between ">
         <h2>{type.toUpperCase()}</h2>
         <h2>A.I. CONFIDENCE</h2>
       </div>
-      <ul className="space-y-1">
+      <ul className="space-y-1 flex flex-row sm:flex-col">
         {entries.map(([key, value]) => (
           <li
             key={key}

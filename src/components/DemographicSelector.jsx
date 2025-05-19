@@ -1,20 +1,20 @@
-import React from 'react';
+import React from "react";
 
-const DemographicSelector = ({ 
-  selectedCategory, 
-  onSelect, 
-  topRace, 
-  topAge, 
-  topGender 
+const DemographicSelector = ({
+  selectedCategory,
+  onSelect,
+  topRace,
+  topAge,
+  topGender,
 }) => {
   const categories = [
-    { id: 'race', label: 'RACE', value: topRace },
-    { id: 'age', label: 'AGE', value: topAge },
-    { id: 'gender', label: 'SEX', value: topGender }
+    { id: "race", label: "RACE", value: topRace },
+    { id: "age", label: "AGE", value: topAge },
+    { id: "gender", label: "SEX", value: topGender },
   ];
 
   return (
-    <div className="w-full max-w-[200px] flex flex-col gap-3 font-bold scale-90 sm:scale-100 h-full">
+    <div className="w-full max-w-[600px] sm:max-w-[200px] flex felx-row sm:flex-col gap-3 font-bold scale-90 sm:scale-100 h-full text-sm sm:text-[16px]">
       {categories.map(({ id, label, value }) => (
         <div
           key={id}
@@ -33,4 +33,4 @@ const DemographicSelector = ({
   );
 };
 
-export default DemographicSelector; 
+export default DemographicSelector;
