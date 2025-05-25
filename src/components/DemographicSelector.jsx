@@ -14,7 +14,7 @@ const DemographicSelector = ({
   ];
 
   return (
-    <div className="w-full max-w-[600px] sm:max-w-[200px] flex felx-row sm:flex-col gap-3 font-bold scale-90 sm:scale-100 h-full text-sm sm:text-[16px]">
+    <div className="w-full sm:max-w-[200px] flex flex-row sm:flex-col gap-3 font-bold h-full text-sm sm:text-[16px]">
       {categories.map(({ id, label, value }) => (
         <div
           key={id}

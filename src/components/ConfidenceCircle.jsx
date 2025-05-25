@@ -45,7 +45,7 @@ const ConfidenceCircle = ({ percentage, label }) => {
   const progress = (percentage / 100) * circumference;
 
   return (
-    <div className="bg-gray-100 border-black border-t-2 w-full max-w-[650px] h-full relative">
+    <div className="bg-gray-100 border-black border-t-2 w-full sm:max-w-[650px] h-full min-h-[150px] relative">
       <h1 className="absolute top-2 left-3 font-thin text-2xl">{label}</h1>
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         <svg

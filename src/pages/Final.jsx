@@ -79,7 +79,7 @@ const Final = () => {
         <p className="text-sm text-gray-500">PREDICTED RACE & AGE</p>
       </div>
       <div className="flex items-center justify-center h-full relative gap-4 w-full">
-      <div className="flex sm:flex-row flex-col items-center justify-center h-[400px] relative gap-4 w-full">
+        <div className="flex sm:flex-row flex-col items-stretch justify-center h-[400px] relative gap-4 w-full max-w-[1200px]">
           <DemographicSelector
             selectedCategory={selectedCategory}
             onSelect={setSelectedCategory}

@@ -49,7 +49,7 @@ const Demographics = ({
   };
 
   return (
-    <div className="bg-gray-100 w-full max-w-[300px] h-full p-4 border-black border-t-2 scale-90 sm:scale-100">
+    <div className="bg-gray-100 w-full sm:max-w-[300px] h-full p-4 border-black border-t-2">
 
       
       {race && (

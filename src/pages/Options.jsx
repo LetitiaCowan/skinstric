@@ -24,61 +24,42 @@ const Options = () => {
           hovering ? "opacity-100 scale-100" : "opacity-0 scale-50"
         }`}
         style={{ transitionProperty: "opacity, transform" }} // Important!
-        >
+      >
         {hoverEffect()}
       </div>
 
-      {/* Grid */}
-      {/* <div className="rotate-45 w-[320px] h-[320px] bg-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 grid grid-cols-2 grid-rows-2 gap-2 p-4">
-        {[
-          "Demographics",
-          "Skin type details",
-          "Cosmetic Concerns",
-          "Weather",
-        ].map((text, i) => (
-          <Link
-            key={i}
-            to={text === "Demographics" ? "/final" : "#"}
-            state={text === "Demographics" ? { data } : undefined}
-            onMouseEnter={() => setHovering(true)}
-            onMouseLeave={() => setHovering(false)}
-            className="transition-all ease-in-out duration-300 bg-gray-100 hover:bg-gray-200 flex items-center justify-center"
-          >
-            <h2 className="text-sm -rotate-45">{text}</h2>
-          </Link>
-        ))}
-      </div> */}
+     
       <div className="rotate-45 w-[320px] h-[320px] bg-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 grid grid-cols-2 grid-rows-2 gap-2 p-4">
-          <Link
-            to={"/final"}
-            state={{ data }}
-            onMouseEnter={() => setHovering(true)}
-            onMouseLeave={() => setHovering(false)}
-            className="transition-all ease-in-out duration-300 bg-gray-100 hover:bg-gray-200 flex items-center justify-center"
-          >
-            <h2 className="text-sm -rotate-45">Demographics</h2>
-          </Link>
-          <div
-            onMouseEnter={() => setHovering(true)}
-            onMouseLeave={() => setHovering(false)}
-            className="transition-all cursor-not-allowed	 ease-in-out duration-300 bg-gray-100 hover:bg-gray-200 flex items-center justify-center"
-          >
-            <h2 className="text-sm -rotate-45">Cosmetic Concerns</h2>
-          </div>
-          <div
-            onMouseEnter={() => setHovering(true)}
-            onMouseLeave={() => setHovering(false)}
-            className="transition-all cursor-not-allowed	 ease-in-out duration-300 bg-gray-100 hover:bg-gray-200 flex items-center justify-center"
-          >
-            <h2 className="text-sm -rotate-45">Skin type details</h2>
-          </div>
-          <div
-            onMouseEnter={() => setHovering(true)}
-            onMouseLeave={() => setHovering(false)}
-            className="transition-all cursor-not-allowed	 ease-in-out duration-300 bg-gray-100 hover:bg-gray-200 flex items-center justify-center"
-          >
-            <h2 className="text-sm -rotate-45">Weather</h2>
-          </div>
+        <Link
+          to={"/final"}
+          state={{ data }}
+          onMouseEnter={() => setHovering(true)}
+          onMouseLeave={() => setHovering(false)}
+          className="transition-all ease-in-out duration-300 bg-gray-100 hover:bg-gray-200 flex items-center justify-center"
+        >
+          <h2 className="text-sm -rotate-45">Demographics</h2>
+        </Link>
+        <div
+          onMouseEnter={() => setHovering(true)}
+          onMouseLeave={() => setHovering(false)}
+          className="transition-all cursor-not-allowed	 ease-in-out duration-300 bg-gray-100 hover:bg-gray-200 flex items-center justify-center"
+        >
+          <h2 className="text-sm -rotate-45">Cosmetic Concerns</h2>
+        </div>
+        <div
+          onMouseEnter={() => setHovering(true)}
+          onMouseLeave={() => setHovering(false)}
+          className="transition-all cursor-not-allowed	 ease-in-out duration-300 bg-gray-100 hover:bg-gray-200 flex items-center justify-center"
+        >
+          <h2 className="text-sm -rotate-45">Skin type details</h2>
+        </div>
+        <div
+          onMouseEnter={() => setHovering(true)}
+          onMouseLeave={() => setHovering(false)}
+          className="transition-all cursor-not-allowed	 ease-in-out duration-300 bg-gray-100 hover:bg-gray-200 flex items-center justify-center"
+        >
+          <h2 className="text-sm -rotate-45">Weather</h2>
+        </div>
       </div>
     </div>
   );

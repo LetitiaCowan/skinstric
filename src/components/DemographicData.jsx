@@ -11,11 +11,11 @@ const DemographicData = ({ data, type, onSelect, setPercentage, selectedItem }) 
         <h2>{type.toUpperCase()}</h2>
         <h2>A.I. CONFIDENCE</h2>
       </div>
-      <ul className="space-y-1 flex flex-row sm:flex-col">
+      <ul className=" flex flex-row sm:flex-col flex-wrap gap-2">
         {entries.map(([key, value]) => (
           <li
             key={key}
-            className={`flex justify-between cursor-pointer p-1 transition-all duration-100 ease-out ${
+            className={`flex gap-1 justify-between cursor-pointer p-1 transition-all duration-100 ease-out ${
               selectedItem === key
                 ? "bg-black text-white hover:bg-black"
                 : "text-gray-700 hover:bg-gray-200"
