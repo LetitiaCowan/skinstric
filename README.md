@@ -1,70 +1,50 @@
-# Getting Started with Create React App
+# Skinstric AI
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React frontend for **Skinstric**, an AI-powered skincare company — built as contract frontend work. The app walks a user through a guided skin analysis: capture or upload a photo, send it to Skinstric's AI backend, and get back a personalized breakdown of predicted demographics with confidence scores, presented through custom interactive visualizations.
 
-## Available Scripts
+👉 **Live Site:** https://skinstric-five.vercel.app/
 
-In the project directory, you can run:
+## How it works
 
-### `npm start`
+The app is a multi-step flow, each step its own route:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. **Landing (`/`)** — animated intro built with GSAP timelines; hover interactions reveal "Discover A.I." and "Take Test" entry points.
+2. **Info capture (`/testing`)** — collects the user's name and location, then posts it to Skinstric's live API to kick off a session.
+3. **Photo capture (`/results`)** — the user provides a photo two ways:
+   - **Live webcam capture**, with a custom permission flow, live video preview, and canvas-based still capture — no external camera library, built from scratch on top of `navigator.mediaDevices`.
+   - **Gallery upload**, as a fallback for users who'd rather not use their camera.
+   
+   The image is sent to Skinstric's AI analysis endpoint, and the result — predicted race, age, and gender with per-category confidence scores — comes back from a real backend, not mocked data.
+4. **Category menu (`/options`)** — a diamond-shaped nav for exploring different analysis categories. Demographics is live; Cosmetic Concerns, Skin Type Details, and Weather are scaffolded in the UI as planned next steps.
+5. **Results (`/final`)** — an interactive breakdown of the AI's predictions: a category selector (Race / Age / Sex), an animated SVG confidence ring that redraws as you switch categories or drill into individual predicted values, and a ranked list of every value the model considered with its confidence percentage.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Notable technical details
 
-### `npm test`
+- **Real API integration** — the app calls two live Google Cloud Function endpoints (`skinstricPhaseOne` for session start, `skinstricPhaseTwo` for image analysis), not a mocked or local dataset.
+- **Custom webcam capture hook** — handles camera permissions, live `<video>` streaming, canvas frame capture, and stream teardown, with its own permission-request UI rather than the browser default.
+- **Animated, data-driven confidence chart** — a hand-built SVG ring (not a charting library) whose stroke offset is calculated from the selected prediction's confidence score, with a size that adapts across five breakpoints.
+- **GSAP-driven interactions** on the landing page, using paired timelines to animate two independent text elements in sync on hover.
+- Fully responsive, from mobile through desktop, styled with Tailwind CSS.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Tech stack
 
-### `npm run build`
+- React 19 + React Router 7
+- Tailwind CSS
+- GSAP (animation)
+- Axios (API calls)
+- Create React App / react-scripts
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Getting started
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+git clone https://github.com/LetitiaCowan/skinstric.git
+cd skinstric
+npm install
+npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Runs at [http://localhost:3000](http://localhost:3000). Note that the info-capture and photo-analysis steps call Skinstric's live backend endpoints, so those steps require network access to those services.
 
-### `npm run eject`
+## Status
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Built as a contract engagement; the core analysis flow (intro → capture → AI results) is complete. Cosmetic Concerns, Skin Type Details, and Weather were scoped as future categories and are visible but disabled in the UI.
